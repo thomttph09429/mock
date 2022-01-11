@@ -1,182 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/green"
-    android:orientation="vertical">
+   >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.11"/>
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.07643312" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_arrow_back" />
-    </RelativeLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.71" />
 
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textColor="@color/black"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="152dp">
+    <TextView
+        android:id="@+id/tvText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/total_budget"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/title"
-            android:textColor="@color/black_3"
-            android:textSize="23sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tvDollar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/budget"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvText"
+        app:layout_constraintStart_toEndOf="@+id/tvText"
+        app:layout_constraintTop_toTopOf="@+id/tvText" />
 
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_marginStart="@dimen/_25sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/total_budget"
-            android:textColor="@color/black_9" />
-
-        <TextView
-            android:id="@+id/tvTotal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_toEndOf="@id/tv"
-            android:text="@string/budget"
-            android:textColor="@color/black_4"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDollar"
+        app:layout_constraintStart_toEndOf="@+id/tvDollar"
+        app:layout_constraintTop_toTopOf="@+id/tvDollar" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpBudget"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
-        android:paddingStart="@dimen/_25sdp"
-        android:paddingEnd="@dimen/_80sdp" />
+        android:layout_height="wrap_content"
+        android:paddingStart="43dp"
+        android:paddingEnd="130dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvText"
+        app:layout_constraintBottom_toTopOf="@+id/view2"/>
 
-    <LinearLayout
+    <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_height="400dp"
         android:background="@drawable/bottom_white"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_120sdp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/ruler_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:textColor="@color/black_9"
-                android:text="@string/dollar"
-                android:textSize="30sp"
+    <TextView
+        android:id="@+id/tvDollar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dollar"
+        android:textColor="#A8ACAC"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@id/view1"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="@id/view2" />
 
-                />
+    <TextView
+        android:id="@+id/tvBudget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:text="20"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvDollar2"
+        app:layout_constraintStart_toEndOf="@+id/tvDollar2"
+        app:layout_constraintTop_toTopOf="@+id/tvDollar2" />
 
-            <TextView
-                android:id="@+id/tvSpend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:textColor="@color/black_3"
-                android:text="400"
-                android:textSize="35sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRuler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline3" />
 
-        <RelativeLayout
-            android:id="@+id/rulerBottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ruler_bottom"
-            android:orientation="vertical">
+    <View
+        android:id="@+id/marker"
+        android:layout_width="6dp"
+        android:layout_height="35dp"
+        android:background="@drawable/choose"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="-2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rvRuler"
+        app:layout_constraintStart_toEndOf="@+id/guideline1"
+        app:layout_constraintTop_toTopOf="@+id/rvRuler" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvRuler"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_35sdp"
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/rvRuler"
+        android:textSize="18sp"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
-                />
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
+        android:layout_marginTop="10dp"
+        android:textColor="#DDDCDC"/>
 
-            <View
-                android:id="@+id/marker"
-                android:layout_width="@dimen/_7sdp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginStart="@dimen/_40sdp"
-                android:layout_marginTop="@dimen/_28sdp"
-                android:background="@drawable/choose" />
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/save"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="@color/black_3"
+        android:background="@drawable/button_save"
+        />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rvRuler"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="-1dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/left"
-                    android:layout_width="@dimen/_180sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/status_normal"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@string/description_normal"
-                        android:textColor="@color/white_text" />
-
-
-                </LinearLayout>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_60sdp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:layout_toEndOf="@+id/left"
-                    android:background="@drawable/button_circle"
-                    android:text="@string/save"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black_3" />
-            </RelativeLayout>
-        </RelativeLayout>
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

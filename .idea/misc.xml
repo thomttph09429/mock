@@ -3,6 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable-anydpi/ic_arrow_back.xml" value="0.1076388888888889" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/bottom_white.xml" value="0.14536082474226805" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/button_circle.xml" value="0.146875" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/button_save.xml" value="0.146875" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/button_when_default.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/button_when_selected.xml" value="0.146875" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/choose.xml" value="0.1" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_cafe.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_gym.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_house.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_love.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_other.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ic_taxi.xml" value="0.1414715719063545" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/drawable/ruler_bottom.xml" value="0.146875" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/fragment_home.xml" value="0.17012448132780084" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/item.xml" value="0.1361111111111111" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/item1.xml" value="0.13243243243243244" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/item_ruler.xml" value="0.12704918032786885" />
+        <entry key="..\:/FPT/mock/ThomTT1_mock/mock_project/app/src/main/res/layout/item_type_spending.xml" value="0.13080601092896174" />
         <entry key="..\:/FPT/mock/project_mock/app/src/main/res/drawable-anydpi/ic_arrow_back.xml" value="0.1" />
         <entry key="..\:/FPT/mock/project_mock/app/src/main/res/drawable/background_image.xml" value="0.1" />
         <entry key="..\:/FPT/mock/project_mock/app/src/main/res/drawable/background_item_coffee.xml" value="0.1" />

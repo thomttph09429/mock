@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mock App</string>
     <string name="save">Save</string>
-    <string name="title">Set up a monthly budget gold</string>
+    <string name="title">Set up a monthly\nbudget gold</string>
     <string name="total_budget">Total budget is</string>
     <string name="budget">$ 1,500</string>
     <string name="dollar">$</string>
@@ -10,9 +10,9 @@
     <string name="status_a_lot">That is a lot </string>
     <string name="status_crazy">You are crazy?</string>
 
-    <string name="description_normal">It is ok to eat at your place \nUp to 5 % of economy</string>
-    <string name="description_a_lot">Sometime, you can eat in coffee\n Up to 3 % of economy</string>
-    <string name="description_crazy">Eat in restaurant everyday \n Blow off 30% of money</string>
+    <string name="description_normal">It is ok to eat at your place\nUp to 5 % of economy</string>
+    <string name="description_a_lot">Sometime, you can eat in cafe\nUp to 3 % of economy</string>
+    <string name="description_crazy">Eat in restaurant everyday\nBlow off 30% of money</string>
 
 
 </resources>

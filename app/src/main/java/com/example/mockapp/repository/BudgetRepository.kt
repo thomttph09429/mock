@@ -10,14 +10,16 @@ import kotlinx.coroutines.withContext
 
 class BudgetRepository(private val budgetDao: BudgetDao) : IBudgetRepository {
     override suspend fun getAllBudget(): Flow<List<Budget>> {
-       return budgetDao.getAllBudget().flowOn(Dispatchers.IO)
+        return budgetDao.getAllBudget().flowOn(Dispatchers.IO)
 
     }
 
     override suspend fun insertBudget(budget: List<Budget>) {
-        budgetDao.insertBudget(budget)    }
+        budgetDao.insertBudget(budget)
+    }
 
-    override suspend fun updateBudget(budget: Budget) = withContext(Dispatchers.IO) {
-        budgetDao.updateBudget(budget)
+
+    override suspend fun updateBudget(budgetValue: Long, budgetId: Int) {
+        budgetDao.updateBudget(budgetValue, budgetId)
     }
 }

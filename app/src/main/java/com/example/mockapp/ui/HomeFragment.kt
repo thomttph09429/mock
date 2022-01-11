@@ -1,9 +1,11 @@
 package com.example.mockapp.ui
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -13,77 +15,92 @@ import com.example.mockapp.base.BaseFragment
 import com.example.mockapp.databinding.FragmentHomeBinding
 import kotlin.math.abs
 import android.view.animation.AnimationUtils
+import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mockapp.R
 import com.example.mockapp.adapter.RulerAdapter
 import com.example.mockapp.db.InitData
+import com.example.mockapp.db.entity.Budget
 import com.example.mockapp.util.Constant.HIGH
 import com.example.mockapp.util.Constant.NORMAL
+import com.example.mockapp.util.Constant.TOO_HIGH
 import com.example.mockapp.viewmodel.BudgetViewModel
 
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(), IListener {
+class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
     private var oldPrice = 0
-    private lateinit var typeSpendingAdapter: TypeSpendingAdapter
+    private lateinit var budgetAdapter: BudgetAdapter
     private val rulerAdapter = RulerAdapter()
     private var linearLayoutManager: LinearLayoutManager? = null
     private val viewModel: BudgetViewModel by viewModels()
-
-
-    private var mPositionCurrent: Int = 1
     override fun initView() {
-        viewModel.getAllBudget()
-        initTypeSpending()
-        setUpToolbar()
-        initRuler()
+        initBudgetPlan()
+        initScrollbar()
 
     }
 
+    override fun initAction() {
+        scrollRuler()
+    }
 
-    private fun scrollRuler() {
-        binding.rvRuler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+    private fun updateBudget(position: Int) = with(binding) {
+        btnSave.setOnClickListener {
+            val budgetValue = tvBudget.text.toString().toLong()
+            viewModel.updateBudge(budgetValue, position)
+        }
+
+
+    }
+
+    private fun scrollRuler() = with(binding) {
+        rvRuler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                startMarkAnimation()
                 startTextAnimation()
 
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
+                startMarkAnimation()
                 val visiblePosition = linearLayoutManager!!.findFirstVisibleItemPosition()
                 val newPrice: Int = visiblePosition.plus(2) * 10
                 Handler(Looper.getMainLooper()).postDelayed({
                     oldPrice = newPrice
                 }, 1)
-                startCostAnimation(oldPrice, newPrice, binding.tvSpend)
-                when (newPrice) {
-                    in 0..NORMAL -> {
-                        changeTextStatus(
-                            resources.getString(R.string.status_normal),
-                            resources.getString(R.string.description_normal)
-                        )
+                startCostAnimation(oldPrice, newPrice, tvBudget)
+                updateStatus(newPrice)
 
-                    }
-                    in NORMAL..HIGH -> {
-                        changeTextStatus(
-                            resources.getString(R.string.status_a_lot),
-                            resources.getString(R.string.description_a_lot)
-                        )
-                    }
-                    else -> {
-                        changeTextStatus(
-                            resources.getString(R.string.status_crazy),
-                            resources.getString(R.string.description_crazy)
-                        )
-                    }
-                }
             }
+
         })
 
 
+    }
+
+    private fun updateStatus(newPrice: Int) {
+        when {
+            newPrice <= NORMAL -> {
+                changeTextStatus(
+                    resources.getString(R.string.status_normal),
+                    resources.getString(R.string.description_normal)
+                )
+            }
+            newPrice >= TOO_HIGH -> {
+                changeTextStatus(
+                    resources.getString(R.string.status_crazy),
+                    resources.getString(R.string.description_crazy)
+                )
+            }
+            else -> {
+                changeTextStatus(
+                    resources.getString(R.string.status_a_lot),
+                    resources.getString(R.string.description_a_lot)
+                )
+            }
+        }
     }
 
     private fun changeTextStatus(status: String, description: String) =
@@ -92,79 +109,64 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IListener {
             tvDescription.text = description
         }
 
-    private fun initRuler() {
+    fun showCostByCategory(position: Int) = with(binding) {
 
-        val rulerList = arrayListOf<Int>()
-        for (i in 0..3000 step 10) {
-            rulerList.add(i)
-        }
-        rulerAdapter.submitList(rulerList)
-
-        linearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvRuler.apply {
-            adapter = rulerAdapter
-            layoutManager = linearLayoutManager
-
-        }
-        scrollRuler()
-
-    }
-
-
-    private fun setUpToolbar() {
-        binding.toolbar.setOnClickListener {
-            activity?.finish()
-        }
-
-    }
-
-    override fun isCurrent(): Int {
-        Log.e("isCurrent", mPositionCurrent.toString())
-        return mPositionCurrent
-
-
-    }
-
-
-    fun showCostByCategory(position: Int) {
-        viewModel.budgets.observe(this, Observer {
-            val coffee = it[0].budgetValue.toInt()
-            val house = it[1].budgetValue.toInt()
-            val lover = it[2].budgetValue.toInt()
-            val eating = it[3].budgetValue.toInt()
-            val taxi = it[4].budgetValue.toInt()
-            val other = it[5].budgetValue.toInt()
+        viewModel.budgets.observe(this@HomeFragment, { budgets ->
+            val costStart: Int = tvBudget.text.toString().toInt()
+            val costEnd: Int = budgets[position].budgetValue.toInt()
+            startCostAnimation(costStart, costEnd, tvBudget)
+            val coffee = budgets[0].budgetValue.toInt()
+            val house = budgets[1].budgetValue.toInt()
+            val lover = budgets[2].budgetValue.toInt()
+            val gym = budgets[3].budgetValue.toInt()
+            val taxi = budgets[4].budgetValue.toInt()
+            val other = budgets[5].budgetValue.toInt()
             when (position) {
                 0 -> {
-                    startCostAnimation(house, coffee, binding.tvSpend)
+                    updateScrollbar((coffee / 10) - 2)
+                    updateBudget(position)
 
                 }
                 1 -> {
-                    startCostAnimation(coffee, house, binding.tvSpend)
+
+                    updateScrollbar((house / 10) - 2)
+                    updateBudget(position)
 
                 }
                 2
                 -> {
-                    startCostAnimation(house, lover, binding.tvSpend)
+
+                    updateScrollbar((lover / 10) - 2)
+                    updateBudget(position)
 
                 }
                 3
                 -> {
-                    startCostAnimation(lover, eating, binding.tvSpend)
+
+                    updateScrollbar((gym / 10) - 2)
+                    updateBudget(position)
 
                 }
                 4
                 -> {
-                    startCostAnimation(eating, taxi, binding.tvSpend)
+                    updateScrollbar((taxi / 10) - 2)
+                    updateBudget(position)
 
                 }
                 5
                 -> {
-                    startCostAnimation(taxi, other, binding.tvSpend)
+                    updateScrollbar((other / 10) - 2)
+                    updateBudget(position)
 
                 }
             }
         })
+
+    }
+
+    private fun updateScrollbar(position: Int) {
+        linearLayoutManager?.scrollToPositionWithOffset(position, 0)
+        updateStatus(position * 10)
 
     }
 
@@ -184,10 +186,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IListener {
     }
 
     private fun startCostAnimation(start: Int, end: Int, view: TextView) {
-        val animator = ValueAnimator.ofInt(start, end)
-        animator.duration = 1000
+        val animator = ValueAnimator.ofInt(start ,end)
+        animator.duration = 500
         animator.addUpdateListener { animation ->
-            view.text = animation.animatedValue.toString()
+            val value= animation.animatedValue.toString().toInt()
+            if (value % 2==0){
+                view.text = value.toString()
+
+            }
         }
         animator.start()
         view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
@@ -196,22 +202,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IListener {
     }
 
 
-    override fun getViewBinding(): FragmentHomeBinding =
-        FragmentHomeBinding.inflate(layoutInflater)
+    private fun initScrollbar() {
+        val rulerList = arrayListOf<Int>()
+        for (i in 0..3000 step 10) {
+            rulerList.add(i)
+        }
+        rulerAdapter.submitList(rulerList)
+        binding.rvRuler.apply {
+            linearLayoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = rulerAdapter
+            layoutManager = linearLayoutManager
+        }
 
-    private fun initTypeSpending() {
-        typeSpendingAdapter = TypeSpendingAdapter(requireContext(), this)
-        binding.vpBudget.apply {
+    }
+
+    private fun initBudgetPlan() = with(binding) {
+        viewModel.getAllBudget()
+        budgetAdapter = BudgetAdapter(requireContext())
+        vpBudget.apply {
             viewModel.budgets.observe(this@HomeFragment, Observer {
                 if (it.isEmpty()) {
                     viewModel.insertBudget(InitData.getData())
                 } else {
-                    typeSpendingAdapter.submitList(it)
+                    budgetAdapter.submitList(it)
 
                 }
             })
-            adapter = typeSpendingAdapter
-            binding.vpBudget.apply {
+            adapter = budgetAdapter
+            vpBudget.apply {
                 clipToPadding = false
                 clipChildren = false
                 offscreenPageLimit = 3
@@ -229,18 +248,26 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), IListener {
                     }
                 }
 
-                binding.vpBudget.registerOnPageChangeCallback(object :
+                vpBudget.registerOnPageChangeCallback(object :
                     ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
+
                         showCostByCategory(position)
                     }
 
-                })
+
+                }
+
+                )
+
             }
 
-            binding.vpBudget.setPageTransformer(pageTransformer)
+            vpBudget.setPageTransformer(pageTransformer)
 
         }
     }
+
+    override fun getViewBinding(): FragmentHomeBinding =
+        FragmentHomeBinding.inflate(layoutInflater)
 }

@@ -7,8 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#F4F4F4</color>
-    <color name="white_text">#F1C5D4</color>
+    <color name="green">#F6FAFA</color>
+    <color name="white_text">#DDDCDC</color>
 
     <color name="black_1">#111111</color>
     <color name="black_2">#222222</color>
@@ -17,11 +17,19 @@
     <color name="black_5">#555555</color>
     <color name="black_9">#999999</color>
 
-    <color name="color_coffee">#F86698</color>
-    <color name="color_lover">#F44336</color>
-    <color name="color_house">#2196F3</color>
+    <color name="color_coffee">#6666f0</color>
+    <color name="color_lover">#FBB245</color>
+    <color name="color_house">#09C6B5</color>
     <color name="color_taxi">#4CAF50</color>
-    <color name="color_eating">#CDDC39</color>
+    <color name="color_gym">#F15D52</color>
     <color name="color_other">#3F51B5</color>
+    <color name="color_ruler">#6666f0</color>
+
+    <color name="color_coffee_dark">#4C4CE1</color>
+    <color name="color_lover_dark">#E9AC4F</color>
+    <color name="color_house_dark">#05A596</color>
+    <color name="color_taxi_dark">#238027</color>
+    <color name="color_gym_dark">#CC3A2F</color>
+    <color name="color_other_dark">#374CBF</color>
 
 </resources>

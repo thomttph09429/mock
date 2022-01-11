@@ -12,6 +12,7 @@ object Constant {
     const val  COLUMN_TITLE="title"
     const val  COLUMN_VALUE="value"
     const val  COLUMN_BACKGROUND_COLOR="background_color"
+    const val  COLUMN_BACKGROUND_IMAGE="background_image"
 
 
 }

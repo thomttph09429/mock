@@ -35,9 +35,10 @@ class BudgetViewModel(application: Application) : AndroidViewModel(application) 
             budgetRepository.insertBudget(budget)
         }
     }
-     fun updateBudge(budget: Budget){
-         viewModelScope.launch {
-             budgetRepository.updateBudget(budget)
-         }
-     }
+
+    fun updateBudge(budgetValue: Long,budgetId: Int){
+        viewModelScope.launch {
+            budgetRepository.updateBudget(budgetValue, budgetId)
+        }
+    }
 }
