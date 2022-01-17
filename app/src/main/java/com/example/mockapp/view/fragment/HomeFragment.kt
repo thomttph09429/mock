@@ -18,6 +18,7 @@ import com.example.mockapp.R
 import com.example.mockapp.adapter.BudgetAdapter
 import com.example.mockapp.adapter.RulerAdapter
 import com.example.mockapp.db.DataProvider
+import com.example.mockapp.db.entity.Budget
 import com.example.mockapp.view.pagetranform.BudgetPageTranformer
 import com.example.mockapp.util.Constant.NORMAL
 import com.example.mockapp.util.Constant.PAGE_CAFE
@@ -37,6 +38,9 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
     private val rulerAdapter = RulerAdapter()
     private var linearLayoutManager: LinearLayoutManager? = null
     private val viewModel: BudgetViewModel by activityViewModels()
+    private var listBudget = arrayListOf<Budget>()
+
+
     override fun initView() {
         initBudgetPlan()
         initScrollbar()
@@ -49,6 +53,9 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
     override fun initData() {
         viewModel.getAllBudget()
+        viewModel.budgets.observe(this@HomeFragment, { budgets ->
+            listBudget = budgets as ArrayList<Budget>
+        })
     }
 
 
@@ -125,18 +132,16 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
     fun showCostByCategory(position: Int) = with(binding) {
 
-        viewModel.budgets.observe(this@HomeFragment, { budgets ->
             val costStart: Int = tvBudget.text.toString().toInt()
-            val costEnd: Int = budgets[position].budgetValue.toInt()
+            val costEnd: Int = listBudget[position].budgetValue.toInt()
             startCostAnimation(costStart, costEnd, tvBudget)
-            val coffee = budgets[PAGE_CAFE].budgetValue.toInt()
-            val house = budgets[PAGE_HOUSE].budgetValue.toInt()
-            val lover = budgets[PAGE_LOVE].budgetValue.toInt()
-            val gym = budgets[PAGE_GYM].budgetValue.toInt()
-            val taxi = budgets[PAGE_TAXI].budgetValue.toInt()
-            val other = budgets[PAGE_OTHER].budgetValue.toInt()
+            val coffee = listBudget[PAGE_CAFE].budgetValue.toInt()
+            val house = listBudget[PAGE_HOUSE].budgetValue.toInt()
+            val lover = listBudget[PAGE_LOVE].budgetValue.toInt()
+            val gym = listBudget[PAGE_GYM].budgetValue.toInt()
+            val taxi = listBudget[PAGE_TAXI].budgetValue.toInt()
+            val other = listBudget[PAGE_OTHER].budgetValue.toInt()
             updateBudget(position)
-            updateScrollbar(position - 2)
             when (position) {
                 PAGE_CAFE-> {
                     updateScrollbar((coffee / 10) - 2)
@@ -170,7 +175,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
                 }
             }
-        })
+//        })
 
     }
     private fun updateBudget(position: Int) = with(binding) {
