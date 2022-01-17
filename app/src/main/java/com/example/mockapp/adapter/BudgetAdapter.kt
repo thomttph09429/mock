@@ -1,10 +1,8 @@
-package com.example.mockapp.ui
+package com.example.mockapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,14 +13,14 @@ import com.example.mockapp.databinding.ItemTypeSpendingBinding
 import com.example.mockapp.db.entity.Budget
 
 
-class BudgetAdapter(val context: Context) :
+class BudgetAdapter() :
     ListAdapter<Budget, BudgetAdapter.TypeSendViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): TypeSendViewHolder {
         val binding =
-            ItemTypeSpendingBinding.inflate(LayoutInflater.from(context), parent, false)
+            ItemTypeSpendingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TypeSendViewHolder(binding)
 
     }
@@ -37,17 +35,10 @@ class BudgetAdapter(val context: Context) :
     inner class TypeSendViewHolder(private val binding: ItemTypeSpendingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(budget: Budget) = with(binding) {
-
             ivPhoto.setImageResource(budget.budgetImage)
             tvSpending.text = budget.budgetValue.toString()
             tvTitle.text = budget.budgetTitle
-            carView.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    context, budget.backgroundColor
-                )
-            )
-            cardImage.setCardBackgroundColor(  ContextCompat.getColor(
-                context, budget.backgroundImage))
+
         }
 
     }

@@ -5,7 +5,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.mockapp.util.Constant.BUDGET_TABLE
 import com.example.mockapp.util.Constant.COLUMN_BACKGROUND_COLOR
-import com.example.mockapp.util.Constant.COLUMN_BACKGROUND_IMAGE
 import com.example.mockapp.util.Constant.COLUMN_ID
 import com.example.mockapp.util.Constant.COLUMN_IMAGE
 import com.example.mockapp.util.Constant.COLUMN_TITLE
@@ -23,8 +22,7 @@ data class Budget(
     @ColumnInfo(name = COLUMN_VALUE)
     var budgetValue: Long,
     @ColumnInfo(name = COLUMN_BACKGROUND_COLOR)
-    var backgroundColor: Int,
-    @ColumnInfo(name = COLUMN_BACKGROUND_IMAGE)
-var backgroundImage: Int
+    var backgroundColor: Int
+
 ) {
 }

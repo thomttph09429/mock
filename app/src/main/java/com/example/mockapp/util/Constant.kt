@@ -12,7 +12,12 @@ object Constant {
     const val  COLUMN_TITLE="title"
     const val  COLUMN_VALUE="value"
     const val  COLUMN_BACKGROUND_COLOR="background_color"
-    const val  COLUMN_BACKGROUND_IMAGE="background_image"
 
+    const val PAGE_CAFE = 0
+    const val PAGE_HOUSE = 1
+    const val PAGE_LOVE = 2
+    const val PAGE_GYM = 3
+    const val PAGE_TAXI = 4
+    const val PAGE_OTHER = 5
 
 }

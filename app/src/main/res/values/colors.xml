@@ -16,20 +16,19 @@
     <color name="black_4">#444444</color>
     <color name="black_5">#555555</color>
     <color name="black_9">#999999</color>
+    <color name="black_7">#C8C8C8</color>
 
-    <color name="color_coffee">#6666f0</color>
+    <color name="color_coffee">#423ad9</color>
     <color name="color_lover">#FBB245</color>
     <color name="color_house">#09C6B5</color>
     <color name="color_taxi">#4CAF50</color>
     <color name="color_gym">#F15D52</color>
-    <color name="color_other">#3F51B5</color>
-    <color name="color_ruler">#6666f0</color>
+    <color name="color_other">#E91E63</color>
+    <color name="color_ruler">#423ad9</color>
+    <color name="black_8">#AFAFAF</color>
+    <color name="cover_color">#20000000</color>
 
-    <color name="color_coffee_dark">#4C4CE1</color>
-    <color name="color_lover_dark">#E9AC4F</color>
-    <color name="color_house_dark">#05A596</color>
-    <color name="color_taxi_dark">#238027</color>
-    <color name="color_gym_dark">#CC3A2F</color>
-    <color name="color_other_dark">#374CBF</color>
+
+
 
 </resources>

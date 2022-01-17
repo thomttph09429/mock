@@ -1,25 +1,32 @@
 package com.example.mockapp.repository
 
-import androidx.lifecycle.LiveData
 import com.example.mockapp.db.dao.BudgetDao
 import com.example.mockapp.db.entity.Budget
+import com.example.mockapp.util.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class BudgetRepository(private val budgetDao: BudgetDao) : IBudgetRepository {
+class BudgetRepository @Inject constructor(private val dispatcherProvider: DispatcherProvider, private  val budgetDao: BudgetDao) : IBudgetRepository {
     override suspend fun getAllBudget(): Flow<List<Budget>> {
-        return budgetDao.getAllBudget().flowOn(Dispatchers.IO)
+        return budgetDao.getAllBudget().flowOn(dispatcherProvider.io)
 
     }
 
     override suspend fun insertBudget(budget: List<Budget>) {
-        budgetDao.insertBudget(budget)
+        withContext(dispatcherProvider.io){
+            budgetDao.insertBudget(budget)
+
+        }
     }
 
 
     override suspend fun updateBudget(budgetValue: Long, budgetId: Int) {
-        budgetDao.updateBudget(budgetValue, budgetId)
+        withContext(dispatcherProvider.io){
+            budgetDao.updateBudget(budgetValue, budgetId)
+
+        }
     }
 }

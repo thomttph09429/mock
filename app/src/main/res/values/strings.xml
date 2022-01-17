@@ -7,10 +7,10 @@
     <string name="dollar">$</string>
 
     <string name="status_normal">Normal</string>
-    <string name="status_a_lot">That is a lot </string>
+    <string name="status_a_lot">That\'s a lot</string>
     <string name="status_crazy">You are crazy?</string>
 
-    <string name="description_normal">It is ok to eat at your place\nUp to 5 % of economy</string>
+    <string name="description_normal">It\'s OK to eat at your place\nUp to 5 % of economy</string>
     <string name="description_a_lot">Sometime, you can eat in cafe\nUp to 3 % of economy</string>
     <string name="description_crazy">Eat in restaurant everyday\nBlow off 30% of money</string>
 

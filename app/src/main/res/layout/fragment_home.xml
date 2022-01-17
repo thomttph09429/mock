@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green"
-   >
+    android:background="@color/green">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.11"/>
+        app:layout_constraintGuide_percent="0.11" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -31,9 +31,10 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/title"
         android:textColor="@color/black"
-        android:textSize="26sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
@@ -44,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/total_budget"
+        android:textColor="@color/black_8"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -76,12 +78,10 @@
         android:id="@+id/vpBudget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="43dp"
-        android:paddingEnd="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvText"
-        app:layout_constraintBottom_toTopOf="@+id/view2"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvText" />
 
     <View
         android:id="@+id/view2"
@@ -105,9 +105,10 @@
         android:id="@+id/tvDollar2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
         android:text="@string/dollar"
-        android:textColor="#A8ACAC"
-        android:textSize="50sp"
+        android:textColor="@color/black_7"
+        android:textSize="51sp"
         app:layout_constraintBottom_toTopOf="@id/view1"
         app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="@id/view2" />
@@ -117,8 +118,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:textColor="@color/black"
         android:text="20"
+        android:textColor="@color/black"
         android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tvDollar2"
@@ -137,9 +138,9 @@
         android:id="@+id/marker"
         android:layout_width="6dp"
         android:layout_height="35dp"
-        android:background="@drawable/choose"
-        android:layout_marginBottom="4dp"
         android:layout_marginStart="-2dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/choose"
         app:layout_constraintBottom_toBottomOf="@+id/rvRuler"
         app:layout_constraintStart_toEndOf="@+id/guideline1"
         app:layout_constraintTop_toTopOf="@+id/rvRuler" />
@@ -148,37 +149,36 @@
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/rvRuler"
-        android:textSize="18sp"
         android:layout_marginTop="24dp"
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/rvRuler" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#DDDCDC"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus"
-        android:layout_marginTop="10dp"
-        android:textColor="#DDDCDC"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
     <Button
         android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/save"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAllCaps="false"
-        android:textColor="@color/black_3"
+        android:layout_width="80dp"
+        android:layout_height="77dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/button_save"
-        />
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textColor="@color/black_4"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,30 +1,24 @@
 package com.example.mockapp.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import com.example.mockapp.db.BudgetDatabase
+import androidx.lifecycle.*
 import com.example.mockapp.db.entity.Budget
 import com.example.mockapp.repository.BudgetRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class BudgetViewModel(application: Application) : AndroidViewModel(application) {
-    private val budgetRepository: BudgetRepository
+@HiltViewModel
+class BudgetViewModel @Inject constructor(private  val budgetRepository: BudgetRepository) : ViewModel() {
     private val _budget = MutableLiveData<List<Budget>>()
     val budgets: LiveData<List<Budget>> = _budget
 
-    init {
-        val budgetDao = BudgetDatabase.getInstance(application).budgetDao()
-        budgetRepository = BudgetRepository(budgetDao)
-    }
+
 
     fun getAllBudget() {
         viewModelScope.launch {
-            budgetRepository.getAllBudget().collect {
-                _budget.value=it
+            budgetRepository.getAllBudget().collect { budget->
+                _budget.value=budget
             }
         }
 
