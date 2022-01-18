@@ -19,5 +19,6 @@ object Constant {
     const val PAGE_GYM = 3
     const val PAGE_TAXI = 4
     const val PAGE_OTHER = 5
+    const val ALPHA_DURATION = 500L
 
 }

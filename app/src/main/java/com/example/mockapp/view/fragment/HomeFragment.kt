@@ -1,5 +1,7 @@
 package com.example.mockapp.view.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorInflater
 import android.animation.ValueAnimator
 import android.os.Handler
 import android.os.Looper
@@ -19,6 +21,7 @@ import com.example.mockapp.adapter.BudgetAdapter
 import com.example.mockapp.adapter.RulerAdapter
 import com.example.mockapp.db.DataProvider
 import com.example.mockapp.db.entity.Budget
+import com.example.mockapp.util.Constant.ALPHA_DURATION
 import com.example.mockapp.view.pagetranform.BudgetPageTranformer
 import com.example.mockapp.util.Constant.NORMAL
 import com.example.mockapp.util.Constant.PAGE_CAFE
@@ -39,6 +42,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
     private var linearLayoutManager: LinearLayoutManager? = null
     private val viewModel: BudgetViewModel by activityViewModels()
     private var listBudget = arrayListOf<Budget>()
+    private var alphaAnimator: Animator? = null
 
 
     override fun initView() {
@@ -175,7 +179,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
                 }
             }
-//        })
+
 
     }
     private fun updateBudget(position: Int) = with(binding) {
@@ -210,13 +214,17 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
     private fun startCostAnimation(start: Int, end: Int, view: TextView) {
         val animator = ValueAnimator.ofInt(start, end)
-        animator.duration = 500
+        animator.duration = ALPHA_DURATION
         animator.addUpdateListener { animation ->
             val value = animation.animatedValue.toString().toInt()
             view.text = value.toString()
         }
         animator.start()
-        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+        alphaAnimator = AnimatorInflater.loadAnimator(requireContext(), R.animator.animator_alpha)
+        alphaAnimator?.apply {
+            setTarget(binding.tvBudget)
+            start()
+        }
 
     }
 
