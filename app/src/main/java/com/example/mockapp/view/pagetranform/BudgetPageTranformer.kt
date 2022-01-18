@@ -1,6 +1,5 @@
 package com.example.mockapp.view.pagetranform
 
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -58,7 +57,7 @@ class BudgetPageTranformer(private val colors: List<Int>) :
     }
 
 
-    fun checkCurrentItem(view: View, isCurrentItem: Boolean) {
+    private fun checkCurrentItem(view: View, isCurrentItem: Boolean) {
         val whiteColor = view.context.getColor(R.color.white)
         val parent = view.parent as RecyclerView
         val imgAndText = parent.getChildViewHolder(view)

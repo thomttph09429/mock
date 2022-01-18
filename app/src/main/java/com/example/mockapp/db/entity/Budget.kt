@@ -24,5 +24,4 @@ data class Budget(
     @ColumnInfo(name = COLUMN_BACKGROUND_COLOR)
     var backgroundColor: Int
 
-) {
-}
+)

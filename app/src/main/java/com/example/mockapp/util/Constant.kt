@@ -3,7 +3,9 @@ package com.example.mockapp.util
 object Constant {
 
     const val NORMAL = 1500 / 6
-    const val HIGH=(1500/6)*2
+    const val MAX_SCROLLBAR= 3000
+    const val  STEP_ITEM=10
+    const val  PLUS_ITEM=2
     const val TOO_HIGH=(1500/6)*3
     const val DATABASE_NAME="budget_db"
     const val BUDGET_TABLE = "budget"

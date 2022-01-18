@@ -1,19 +1,16 @@
 package com.example.mockapp.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mockapp.R
 
 import com.example.mockapp.databinding.ItemTypeSpendingBinding
 import com.example.mockapp.db.entity.Budget
 
 
-class BudgetAdapter() :
+class BudgetAdapter :
     ListAdapter<Budget, BudgetAdapter.TypeSendViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,

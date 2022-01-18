@@ -5,7 +5,6 @@ import android.animation.AnimatorInflater
 import android.animation.ValueAnimator
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -13,8 +12,7 @@ import com.example.mockapp.base.BaseFragment
 import com.example.mockapp.databinding.FragmentHomeBinding
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mockapp.R
 import com.example.mockapp.adapter.BudgetAdapter
@@ -22,6 +20,7 @@ import com.example.mockapp.adapter.RulerAdapter
 import com.example.mockapp.db.DataProvider
 import com.example.mockapp.db.entity.Budget
 import com.example.mockapp.util.Constant.ALPHA_DURATION
+import com.example.mockapp.util.Constant.MAX_SCROLLBAR
 import com.example.mockapp.view.pagetranform.BudgetPageTranformer
 import com.example.mockapp.util.Constant.NORMAL
 import com.example.mockapp.util.Constant.PAGE_CAFE
@@ -30,12 +29,14 @@ import com.example.mockapp.util.Constant.PAGE_HOUSE
 import com.example.mockapp.util.Constant.PAGE_LOVE
 import com.example.mockapp.util.Constant.PAGE_OTHER
 import com.example.mockapp.util.Constant.PAGE_TAXI
+import com.example.mockapp.util.Constant.PLUS_ITEM
+import com.example.mockapp.util.Constant.STEP_ITEM
 import com.example.mockapp.util.Constant.TOO_HIGH
 import com.example.mockapp.viewmodel.BudgetViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private var oldPrice = 0
     private  val budgetAdapter= BudgetAdapter()
     private val rulerAdapter = RulerAdapter()
@@ -70,7 +71,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
                 super.onScrollStateChanged(recyclerView, newState)
                 startMarkAnimation()
                 val visiblePosition = linearLayoutManager!!.findFirstVisibleItemPosition()
-                val newPrice: Int = visiblePosition.plus(2) * 10
+                val newPrice: Int = visiblePosition.plus(PLUS_ITEM) * STEP_ITEM
                 Handler(Looper.getMainLooper()).postDelayed({
                     oldPrice = newPrice
                 }, 1)
@@ -148,34 +149,34 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
             updateBudget(position)
             when (position) {
                 PAGE_CAFE-> {
-                    updateScrollbar((coffee / 10) - 2)
+                    updateScrollbar((coffee / STEP_ITEM) - PLUS_ITEM)
 
                 }
                 PAGE_HOUSE -> {
 
-                    updateScrollbar((house / 10) - 2)
+                    updateScrollbar((house / STEP_ITEM) - PLUS_ITEM)
 
                 }
                 PAGE_LOVE
                 -> {
 
-                    updateScrollbar((lover / 10) - 2)
+                    updateScrollbar((lover / STEP_ITEM) - PLUS_ITEM)
 
                 }
                 PAGE_GYM
                 -> {
 
-                    updateScrollbar((gym / 10) - 2)
+                    updateScrollbar((gym / STEP_ITEM) - PLUS_ITEM)
 
                 }
                 PAGE_TAXI
                 -> {
-                    updateScrollbar((taxi / 10) - 2)
+                    updateScrollbar((taxi / STEP_ITEM) - PLUS_ITEM)
 
                 }
                 PAGE_OTHER
                 -> {
-                    updateScrollbar((other / 10) - 2)
+                    updateScrollbar((other / STEP_ITEM) - PLUS_ITEM)
 
                 }
             }
@@ -192,7 +193,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
     }
     private fun updateScrollbar(position: Int) {
         linearLayoutManager?.scrollToPositionWithOffset(position, 0)
-        updateStatus(position * 10)
+        updateStatus(position * STEP_ITEM)
 
     }
 
@@ -204,7 +205,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
         binding.marker.startAnimation(animZoomIn)
     }
 
-    fun startTextAnimation() = with(binding) {
+    private fun startTextAnimation() = with(binding) {
         val animTextIn = AnimationUtils.loadAnimation(context, R.anim.anim_text_in)
         val animTextOut = AnimationUtils.loadAnimation(context, R.anim.anim_text_description_in)
         tvStatus.startAnimation(animTextIn)
@@ -231,7 +232,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
     private fun initScrollbar() {
         val rulerList = arrayListOf<Int>()
-        for (i in 0..3000 step 10) {
+        for (i in 0..MAX_SCROLLBAR step STEP_ITEM) {
             rulerList.add(i)
         }
         rulerAdapter.submitList(rulerList)
@@ -245,10 +246,10 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
 
     private fun initBudgetPlan() = with(binding) {
 
-        var colors = mutableListOf<Int>()
+        val colors = mutableListOf<Int>()
 
         vpBudget.apply {
-            viewModel.budgets.observe(this@HomeFragment, Observer {
+            viewModel.budgets.observe(this@HomeFragment, {
                 if (it.isEmpty()) {
                     viewModel.insertBudget(DataProvider.getData())
                 } else {
@@ -264,7 +265,6 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>() {
                 clipToPadding = false
                 clipChildren = false
                 offscreenPageLimit = 3
-                getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
             }
 
             vpBudget.setPageTransformer(BudgetPageTranformer(colors))
