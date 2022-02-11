@@ -283,6 +283,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+
     override fun getViewBinding(): FragmentHomeBinding =
         FragmentHomeBinding.inflate(layoutInflater)
 }
